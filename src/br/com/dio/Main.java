@@ -177,7 +177,6 @@ public class Main {
         }
     }
 
-
     private static int runUntilGetValidNumber(final int min, final int max) {
         while (true) {
             try {
@@ -192,6 +191,4 @@ public class Main {
             }
         }
     }
-
-
 }
