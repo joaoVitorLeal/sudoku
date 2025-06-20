@@ -173,7 +173,7 @@ public class Main {
         } else if (board.hasErrors()) {
             System.out.println("Seu jogo conté, erros, verifique seu board e ajuste-o");
         } else {
-            System.out.println("Você ainda precisa preenhcer algum espaço");
+            System.out.println("Você ainda precisa preencher algum espaço");
         }
     }
 
