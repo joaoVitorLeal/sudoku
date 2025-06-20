@@ -3,10 +3,7 @@ package br.com.dio;
 import br.com.dio.model.Board;
 import br.com.dio.model.Space;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Scanner;
+import java.util.*;
 import java.util.stream.Stream;
 
 import static br.com.dio.util.BoardTemplate.BOARD_TEMPLATE;
@@ -67,6 +64,9 @@ public class Main {
             spaces.add(new ArrayList<>());
             for (int j = 0; j < BOARD_LIMIT; j++) {
                 var positionConfig = positions.get("%s,%s".formatted(i, j));
+                if (positionConfig == null) {
+                    positionConfig = "0,false";
+                }
                 var expected = Integer.parseInt(positionConfig.split(",")[0]);
                 var fixed = Boolean.parseBoolean(positionConfig.split(",")[1]);
                 var currentSpace = new Space(expected, fixed);
@@ -177,14 +177,18 @@ public class Main {
         }
     }
 
-
-    private static int runUntilGetValidNumber(final int min, final int max){
-        var current = scanner.nextInt();
-        while (current < min || current > max){
-            System.out.printf("Informe um número entre %s e %s\n", min, max);
-            current = scanner.nextInt();
+    private static int runUntilGetValidNumber(final int min, final int max) {
+        while (true) {
+            try {
+                var current = scanner.nextInt();
+                if (current >= min && current <= max) {
+                    return current;
+                }
+                System.out.printf("Informe um número entre %s e %s\n", min, max);
+            } catch (InputMismatchException ex) {
+                System.out.println("Entrada inválida. Informe um número inteiro.");
+                scanner.nextLine();
+            }
         }
-        return current;
     }
-
 }
